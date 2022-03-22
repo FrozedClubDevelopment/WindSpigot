@@ -12,7 +12,7 @@ public class SetTicksPerSecondCommand extends Command {
 	public SetTicksPerSecondCommand(String name) {
 		super(name);
 		this.description = "Sets a custom TPS";
-		this.usageMessage = "/settps";
+		this.usageMessage = "/settps <tps>";
 		this.setPermission("windspigot.command.settps");
 	}
 
@@ -27,8 +27,11 @@ public class SetTicksPerSecondCommand extends Command {
 			return true;
 		} 
 		
-		if (Integer.valueOf(args[0]) != null) {
-			MinecraftServer.getServer().setTps(Integer.valueOf(args[0]));
+		Integer tps = Integer.valueOf(args[0]);
+		
+		if (tps != null) {
+			MinecraftServer.getServer().setTps(tps);
+			sender.sendMessage(ChatColor.AQUA + "Successfully set the server TPS to " + tps + ".");
 		}
 
 		return true;
