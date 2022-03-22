@@ -152,4 +152,12 @@ public class WindSpigotConfig {
 		c.addComment("settings.async.parallel-world",
 				"Enables async world ticking, ticking is faster if there are more worlds. Timings and other profilers are not supported when using this. Please take frequent backups whilst using this.");
 	}
+	
+	public static boolean setTpsCmd;
+
+	private static void setTpsCmd() {
+		setTpsCmd = getBoolean("settings.set-tps-command", false);
+		c.addComment("settings.set-tps-command",
+				"Enables the command \"/settps\" which changes the server's tps. Users require the permission windspigot.command.settps");
+	}
 }

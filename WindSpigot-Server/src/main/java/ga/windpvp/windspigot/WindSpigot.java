@@ -8,6 +8,7 @@ import co.aikar.timings.Timings;
 import ga.windpvp.windspigot.async.AsyncUtil;
 import ga.windpvp.windspigot.async.world.TeleportSafety;
 import ga.windpvp.windspigot.commands.MobAICommand;
+import ga.windpvp.windspigot.commands.SetTicksPerSecondCommand;
 import ga.windpvp.windspigot.config.WindSpigotConfig;
 import ga.windpvp.windspigot.statistics.StatisticsClient;
 import net.md_5.bungee.api.ChatColor;
@@ -31,6 +32,12 @@ public class WindSpigot {
 			MobAICommand mobAiCommand = new MobAICommand("mobai");
 			MinecraftServer.getServer().server.getCommandMap().register(mobAiCommand.getName(), "", mobAiCommand);
 		}
+		// WindSpigot - set tps cmd
+		if (WindSpigotConfig.setTpsCmd) {
+			SetTicksPerSecondCommand setTicksPerSecondCommand = new SetTicksPerSecondCommand("settps");
+			MinecraftServer.getServer().server.getCommandMap().register(setTicksPerSecondCommand.getName(), "",
+					setTicksPerSecondCommand);
+		}
 	}
 
 	private void initStatistics() {
@@ -43,7 +50,8 @@ public class WindSpigot {
 					client.sendMessage("new server");
 				}
 			} catch (IOException ignored) {
-				Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "There was an error enabling WindSpigot statistics! This is usually safe to ignore.");
+				Bukkit.getConsoleSender().sendMessage(ChatColor.RED
+						+ "There was an error enabling WindSpigot statistics! This is usually safe to ignore.");
 			}
 		});
 		AsyncUtil.run(runnable);
